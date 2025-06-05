@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import EditForm from "../components/ui/editForm";
 import { useParams } from "react-router-dom";
 import qualityService from "../services/quality.service";
 import { toast } from "react-toastify";
+import QualityForm from "../components/ui/quallityForm";
 
 // import config from "../config.json";
 
 const EditQualityPage = () => {
   const [quality, setQuality] = useState(null);
-  const [errors, setErrors] = useState(null);
+  const [, setErrors] = useState(null);
   const { id } = useParams();
   // const qualityEndPoint = `quality/${id}`;
 
@@ -50,7 +50,7 @@ const EditQualityPage = () => {
     <>
       <h1>Edit Quality Page</h1>{" "}
       {quality !== null ? (
-        <EditForm data={quality} onSubmit={handleSubmit} />
+        <QualityForm data={quality} onSubmit={handleSubmit} />
       ) : (
         "Loading..."
       )}

@@ -9,7 +9,7 @@ const QualitiesListPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await qualityService.fetcAll();
+      const data = await qualityService.fetchAll();
       setQualitites(data.content);
     };
     fetchData();
