@@ -13,6 +13,11 @@ const getRoutes = (routes) => {
   });
 };
 
+// const QualitiesLoading = ({ children }) => {
+//   const { isLoading } = useQualities();
+//   return isLoading ? <h1>Loading...</h1> : children;
+// };
+
 function App() {
   return (
     <div className="App">

@@ -1,59 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import qualityService from "../services/quality.service";
-import { toast } from "react-toastify";
-import QualityForm from "../components/ui/quallityForm";
 
-// import config from "../config.json";
+import QualityForm from "../components/ui/quallityForm";
+import { useQualities } from "../hooks/useQualities";
 
 const EditQualityPage = () => {
-  const [quality, setQuality] = useState(null);
-  const [, setErrors] = useState(null);
   const { id } = useParams();
-  // const qualityEndPoint = `quality/${id}`;
+  const { getQuality, updateQuality } = useQualities();
+  const quality = getQuality(id);
 
-  const updadeQuality = async (content) => {
-    try {
-      const data = await qualityService.update(id, content);
-      return data.content;
-    } catch (error) {
-      const { message, code } = error.response.data;
-      setErrors({ message, code });
-      toast.error(message);
-    }
-  };
-
-  const getQuality = async (id) => {
-    try {
-      const data = await qualityService.get(id);
-      console.log(data);
-      return data.content;
-    } catch (error) {
-      console.log("Expected error", error);
-    }
-  };
+  console.log("quality", quality);
 
   const handleSubmit = (data) => {
-    updadeQuality(data);
+    updateQuality(data);
   };
-
-  useEffect(() => {
-    getQuality(id).then((data) => setQuality(data));
-    // const fetchData = async () => {
-    //   const { data } = await httpService.get(qualityEndPoint);
-    //   setQuality(data.content);
-    // };
-    // fetchData();
-  }, [id]);
 
   return (
     <>
       <h1>Edit Quality Page</h1>{" "}
-      {quality !== null ? (
-        <QualityForm data={quality} onSubmit={handleSubmit} />
-      ) : (
-        "Loading..."
-      )}
+      <QualityForm data={quality} onSubmit={handleSubmit} />
     </>
   );
 };
