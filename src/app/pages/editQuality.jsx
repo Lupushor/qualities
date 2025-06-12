@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 
 import QualityForm from "../components/ui/quallityForm";
 import { useQualities } from "../hooks/useQualities";
+import { useHistory } from "react-router-dom";
 
 const EditQualityPage = () => {
+  const history = useHistory();
   const { id } = useParams();
   const { getQuality, updateQuality } = useQualities();
   const quality = getQuality(id);
@@ -12,7 +14,11 @@ const EditQualityPage = () => {
   console.log("quality", quality);
 
   const handleSubmit = (data) => {
-    updateQuality(data);
+    updateQuality(data).then((data) => {
+      if (data) {
+        history.push("/");
+      }
+    });
   };
 
   return (

@@ -8,7 +8,7 @@ const QualitiesListPage = () => {
   // const [qualities, setQualitites] = useState([]);
   const history = useHistory();
 
-  const { qualities } = useQualities(); // useEffect(() => {
+  const { qualities, deleteQuality } = useQualities(); // useEffect(() => {
   //   const fetchData = async () => {
   //     const data = await qualityService.fetchAll();
   //     setQualitites(data.content);
@@ -17,11 +17,12 @@ const QualitiesListPage = () => {
   // }, []);
 
   const handleEdit = (param) => {
-    console.log(param);
     history.push(`/edit/${param}`);
   };
-  const handleDelete = (param) => {
-    console.log(param);
+  const handleDelete = (id) => {
+    deleteQuality(id).then(() => {
+      console.log("Quality deleted");
+    });
   };
   return (
     <>
